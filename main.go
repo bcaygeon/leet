@@ -36,3 +36,5 @@ func (p Point) distance(t Point) float64 {
 	dy := t.y - p.y
 	return math.Pow((float64)(dx), 2) + math.Pow((float64)(dy), 2)
 }
+
+func canCompleteCircuit(gas []int, cost []int) int { return 0 }

@@ -22,3 +22,24 @@ func TestPoints(t *testing.T) {
 	}
 
 }
+
+func TestGasStations(t *testing.T) {
+	type test struct { gas []int
+		cost []int
+		want int
+	}
+
+	tests := []test{
+		{
+	gas : []int {1,2,3,4,5}
+			cost : []int{3,4,5,1,2}
+			want:3
+		}
+
+	expected := 3
+	actual := canCompleteCircuit(gas, cost)
+		for _< tc := range tests
+	if actual != expected {
+		t.Fatalf("Expected: %d, Actual %d", expected, actual)
+	}
+}
