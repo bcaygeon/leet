@@ -39,8 +39,9 @@ func (p Point) distance(t Point) float64 {
 }
 
 func canCompleteCircuit(gas []int, cost []int) int {
-	entry := -1
-	for i := 0; i < len(gas); i++ {
+	entry := 0
+tryagain:
+	for i := entry; i < len(gas); i++ {
 		if gas[i] >= cost[i] {
 			entry = i
 			break
@@ -51,9 +52,8 @@ func canCompleteCircuit(gas []int, cost []int) int {
 	var visits int
 	tank := 0
 	log.Printf("Starting journey from station %d", entry)
-	for visits = len(gas); visits > 0; visits-- {
-		log.Printf("Loading tank %d with gas %d\n", tank, gas[i])
 	for visits = len(gas) - 1; visits > 0; visits-- {
+		log.Printf("Loading tank %d with gas %d\n", tank, gas[i])
 		tank = tank + gas[i]
 		tank = tank - cost[i]
 		log.Printf("Draining tank to %d by cost %d", tank, cost[i])
@@ -69,6 +69,9 @@ func canCompleteCircuit(gas []int, cost []int) int {
 	}
 	if visits != 0 {
 		log.Printf("Did not complete cycle of visits %d", visits)
+		if entry < len(gas)-1 {
+			goto tryagain
+		}
 		entry = -1
 	}
 	return entry
