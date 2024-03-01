@@ -53,6 +53,7 @@ func canCompleteCircuit(gas []int, cost []int) int {
 	log.Printf("Starting journey from station %d", entry)
 	for visits = len(gas); visits > 0; visits-- {
 		log.Printf("Loading tank %d with gas %d\n", tank, gas[i])
+	for visits = len(gas) - 1; visits > 0; visits-- {
 		tank = tank + gas[i]
 		tank = tank - cost[i]
 		log.Printf("Draining tank to %d by cost %d", tank, cost[i])
