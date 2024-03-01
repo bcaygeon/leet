@@ -41,14 +41,17 @@ func TestGasStations(t *testing.T) {
 			cost: []int{3, 4, 3},
 			want: -1,
 		},
+		{
+			gas:  []int{5, 1, 2, 3, 4},
+			cost: []int{4, 4, 1, 5, 1},
+			want: 4,
+		},
 	}
-
-	expected := 3
 
 	for _, tc := range tests {
 		actual := canCompleteCircuit(tc.gas, tc.cost)
-		if actual != tc.want {
-			t.Fatalf("Expected: %d, Actual %d", expected, actual)
+		if tc.want != actual {
+			t.Fatalf("Expected: %d, Actual %d", tc.want, actual)
 		}
 	}
 }
