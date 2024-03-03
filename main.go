@@ -39,9 +39,9 @@ func (p Point) distance(t Point) float64 {
 }
 
 func canCompleteCircuit(gas []int, cost []int) int {
-	entry := 0
+	entry := -1
 tryagain:
-	for i := entry; i < len(gas); i++ {
+	for i := entry + 1; i < len(gas); i++ {
 		if gas[i] >= cost[i] {
 			entry = i
 			break
