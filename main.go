@@ -45,6 +45,14 @@ tryagain:
 			entry = i
 			break
 		}
+		if i == len(gas)-1 {
+			entry = -1
+		}
+	}
+
+	if entry == -1 {
+		// no possbile entry point found, no need to try the rest of the circuit
+		return entry
 	}
 
 	i := entry
