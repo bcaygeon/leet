@@ -51,6 +51,11 @@ func TestGasStations(t *testing.T) {
 			cost: []int{3, 2, 7, 3, 2, 9},
 			want: -1,
 		},
+		{
+			gas:  []int{4, 5, 3, 1, 4},
+			cost: []int{5, 4, 3, 4, 2},
+			want: -1,
+		},
 	}
 
 	for _, tc := range tests {
