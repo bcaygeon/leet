@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math"
 )
 
@@ -56,22 +57,26 @@ tryagain:
 	}
 
 	i := entry
+	tank := gas[entry]
 	var visits int
-	tank := 0
-	for visits = len(gas) - 1; visits > 0; visits-- {
-		tank = tank + gas[i]
+	log.Printf("Starting at station %d with tank %d\n", entry, tank)
+	for visits = len(gas); visits > 0; visits-- {
 		tank = tank - cost[i]
 		if i == len(gas)-1 {
 			i = 0
 		} else {
 			i++
 		}
-		if tank <= 0 {
+		if tank < 0 {
 			break
 		}
+
+		tank = tank + gas[i]
+		log.Printf("Moved to station %d with tank %d\n", i, tank)
 	}
+
 	if visits != 0 {
-		if entry < len(gas)-1 {
+		if i != entry {
 			goto tryagain
 		}
 		entry = -1

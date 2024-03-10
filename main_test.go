@@ -58,7 +58,8 @@ func TestGasStations(t *testing.T) {
 		},
 	}
 
-	for _, tc := range tests {
+	for n, tc := range tests {
+		t.Logf("--- Test Case %d", n)
 		actual := canCompleteCircuit(tc.gas, tc.cost)
 		if tc.want != actual {
 			t.Fatalf("Expected: %d, Actual %d", tc.want, actual)
