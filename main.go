@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"math"
 )
 
@@ -42,7 +41,7 @@ func canCompleteCircuit(gas []int, cost []int) int {
 	entry := -1
 tryagain:
 	for i := entry + 1; i < len(gas); i++ {
-		if gas[i] >= cost[i] {
+		if gas[i] >= cost[i] && gas[i] > 0 {
 			entry = i
 			break
 		}
@@ -59,7 +58,7 @@ tryagain:
 	i := entry
 	tank := gas[entry]
 	var visits int
-	log.Printf("Starting at station %d with tank %d\n", entry, tank)
+	// log.Printf("Starting at station %d with tank %d\n", entry, tank)
 	for visits = len(gas); visits > 0; visits-- {
 		tank = tank - cost[i]
 		if i == len(gas)-1 {
@@ -72,11 +71,11 @@ tryagain:
 		}
 
 		tank = tank + gas[i]
-		log.Printf("Moved to station %d with tank %d\n", i, tank)
+		// log.Printf("Moved to station %d with tank %d\n", i, tank)
 	}
 
 	if visits != 0 {
-		if i != entry {
+		if entry != len(gas)-1 {
 			goto tryagain
 		}
 		entry = -1
