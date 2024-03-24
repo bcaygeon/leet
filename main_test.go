@@ -72,3 +72,37 @@ func TestGasStations(t *testing.T) {
 		}
 	}
 }
+
+func TestTopmostelement(t *testing.T) {
+	type test struct {
+		elements   []int
+		iterations int
+		want       int
+	}
+
+	tests := []test{
+		{
+			elements:   []int{5, 2, 2, 4, 0, 6},
+			iterations: 4,
+			want:       5,
+		},
+		{
+			elements:   []int{2},
+			iterations: 1,
+			want:       -1,
+		},
+		{
+			elements:   []int{1, 0},
+			iterations: 1,
+			want:       0,
+		},
+	}
+
+	for n, tc := range tests {
+		t.Logf("--- Test Case %d", n)
+		actual := maximumTop(tc.elements, tc.iterations)
+		if tc.want != actual {
+			t.Fatalf("Expected: %d, Actual %d", tc.want, actual)
+		}
+	}
+}

@@ -56,3 +56,21 @@ func canCompleteCircuit(gas []int, cost []int) int {
 	}
 	return start
 }
+
+func maximumTop(nums []int, k int) int {
+	if (len(nums) == 1 && k%2 == 1) || len(nums) == 0 {
+		return -1
+	}
+
+	index, max := 0, 0
+	for i := 0; i <= k; i++ {
+		if i >= len(nums) {
+			break
+		}
+		if nums[i] >= max && i != (k-1) {
+			max = nums[i]
+			index = i
+		}
+	}
+	return nums[index]
+}
