@@ -38,47 +38,21 @@ func (p Point) distance(t Point) float64 {
 }
 
 func canCompleteCircuit(gas []int, cost []int) int {
-	entry := -1
-tryagain:
-	for i := entry + 1; i < len(gas); i++ {
-		if gas[i] >= cost[i] && gas[i] > 0 {
-			entry = i
-			break
-		}
-		if i == len(gas)-1 {
-			entry = -1
+	l := len(gas)
+	start := -1
+	remainingFuel, totalFuel := 0, 0
+	for i := 0; i < l; i++ {
+		remainingFuel += gas[i] - cost[i]
+		totalFuel += gas[i] - cost[i]
+		if remainingFuel < 0 {
+			remainingFuel = 0
+			start = -1
+		} else if start == -1 {
+			start = i
 		}
 	}
-
-	if entry == -1 {
-		// no possbile entry point found, no need to try the rest of the circuit
-		return entry
+	if totalFuel < 0 {
+		start = -1
 	}
-
-	i := entry
-	tank := gas[entry]
-	var visits int
-	// log.Printf("Starting at station %d with tank %d\n", entry, tank)
-	for visits = len(gas); visits > 0; visits-- {
-		tank = tank - cost[i]
-		if i == len(gas)-1 {
-			i = 0
-		} else {
-			i++
-		}
-		if tank < 0 {
-			break
-		}
-
-		tank = tank + gas[i]
-		// log.Printf("Moved to station %d with tank %d\n", i, tank)
-	}
-
-	if visits != 0 {
-		if entry != len(gas)-1 {
-			goto tryagain
-		}
-		entry = -1
-	}
-	return entry
+	return start
 }
