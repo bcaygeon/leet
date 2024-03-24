@@ -36,3 +36,23 @@ func (p Point) distance(t Point) float64 {
 	dy := t.y - p.y
 	return math.Pow((float64)(dx), 2) + math.Pow((float64)(dy), 2)
 }
+
+func canCompleteCircuit(gas []int, cost []int) int {
+	l := len(gas)
+	start := -1
+	remainingFuel, totalFuel := 0, 0
+	for i := 0; i < l; i++ {
+		remainingFuel += gas[i] - cost[i]
+		totalFuel += gas[i] - cost[i]
+		if remainingFuel < 0 {
+			remainingFuel = 0
+			start = -1
+		} else if start == -1 {
+			start = i
+		}
+	}
+	if totalFuel < 0 {
+		start = -1
+	}
+	return start
+}
